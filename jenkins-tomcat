@@ -1,0 +1,26 @@
+pipeline{
+        agent any 
+        stages{
+            stage("git checkout"){
+                steps{
+                    git 'https://github.com/laxman-mandha/my-repo/'
+                }
+            }
+            stage("maven build"){
+            steps{
+              sh "mvn clean package"
+             }
+            }
+            stage("deploy-dev"){
+            steps{
+              sshagent(['e6fec2ea-e2d1-4232-a946-a5783f88e5af']) {
+              sh """
+                    scp -o StrictHostKeyChecking=no /root/gs-maven/initial/target/gs-maven-0.1.0.jar root@146.88.26.77:/opt
+                    ssh root@146.88.26.77 /opt/
+                    ssh root@146.88.26.77 /opt/
+                 """
+                }
+              }
+            }
+        }
+}
