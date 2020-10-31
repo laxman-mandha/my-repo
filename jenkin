@@ -2,9 +2,9 @@ pipeline{
     
         agent any 
         stages{
-            stage("welcome"){
+            stage("git checkout"){
                 steps{
-                    echo "welcome to jenkins"
+                    git 'https://github.com/laxman-mandha/my-repo'
                 }
             }
         }
