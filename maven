@@ -1,1 +1,19 @@
-
+pipeline{
+        agent any
+        environment{
+        PATH = "/root/gs-maven/initial:$PATH"
+                  }
+        stages{
+            stage("git checkout"){
+                steps{
+                    git 'https://github.com/laxman-mandha/my-repo/'
+                      }
+                                  }
+            stage("maven build"){
+            steps{
+              sh "cd /root/gs-maven/initial"
+              sh "mvn clean package"
+              }
+            }
+        }
+}
