@@ -1,8 +1,5 @@
 pipeline{
         agent any
-        environment{
-        PATH = "/root/gs-maven/initial:$PATH"
-        }
         stages{
             stage("git checkout"){
                 steps{
@@ -11,14 +8,14 @@ pipeline{
             }
             stage("maven build"){
             steps{
-              sh "mvn clean package"
+              sh "mvn -f /gs-maven/initial/pom.xml clean package"
              }
             }
             stage("deploy-dev"){
             steps{
               sshagent(['e6fec2ea-e2d1-4232-a946-a5783f88e5af']) {
               sh """
-                    scp -o StrictHostKeyChecking=no /root/gs-maven/initial/target/gs-maven-0.1.0.jar root@146.88.26.77:/opt/tomcat/webapps/
+                    scp -o StrictHostKeyChecking=no /gs-maven/initial/target/gs-maven-0.1.0.jar root@146.88.26.77:/opt/tomcat/webapps/
                     ssh root@146.88.26.77 /opt/tomcat/bin/shutdown.sh
                     ssh root@146.88.26.77 /opt/tomcat/bin/startup.sh
                  """
