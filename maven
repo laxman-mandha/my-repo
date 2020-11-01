@@ -1,8 +1,5 @@
 pipeline{
         agent any
-        environment{
-        PATH = "/root/gs-maven/initial:$PATH"
-                  }
         stages{
             stage("git checkout"){
                 steps{
@@ -12,7 +9,7 @@ pipeline{
             stage("maven build"){
             steps{
             
-              sh "mvn clean package"
+              sh "mvn -f /root/gs-maven/initial clean package"
               }
             }
         }
