@@ -9,7 +9,7 @@ pipeline{
             stage("maven build"){
             steps{
             
-              sh "mvn -f /root/gs-maven/initial clean package"
+              sh "mvn -f /gs-maven/initial/pom.xml clean package"
               }
             }
         }
