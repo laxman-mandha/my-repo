@@ -15,9 +15,9 @@ pipeline{
             steps{
               sshagent(['e6fec2ea-e2d1-4232-a946-a5783f88e5af']) {
           
-                   sh "scp -P 2288 -o StrictHostKeyChecking=no /gs-maven/initial/target/gs-maven-0.1.0.jar root@146.88.26.77:/opt/tomcat/webapps/"
-                   sh "ssh -p 2288 root@146.88.26.77 /opt/tomcat/bin/shutdown.sh"
-                   sh "ssh -p 2288 root@146.88.26.77 /opt/tomcat/bin/startup.sh"
+                   sh "sudo scp -P 2288 -o StrictHostKeyChecking=no /gs-maven/initial/target/gs-maven-0.1.0.jar root@146.88.26.77:/opt/tomcat/webapps/"
+                   sh "sudo ssh -p 2288 root@146.88.26.77 /opt/tomcat/bin/shutdown.sh"
+                   sh "sudo ssh -p 2288 root@146.88.26.77 /opt/tomcat/bin/startup.sh"
                 }
               }
             }
